@@ -9,7 +9,7 @@
     "url" : "https://github.com/OWASP/crAPI"
   },
   "servers" : [ {
-    "url" : "http://localhost:8888"
+    "url" : "https://crapi-demo.nnsworkshop.com"
   } ],
   "paths" : {
     "/identity/api/auth/signup" : {
@@ -2412,7 +2412,7 @@
                 }
               },
               "example" : {
-                "mechanic_api" : "http://localhost:8000/workshop/api/mechanic/receive_report",
+                "mechanic_api" : "https://crapi-demo.nnsworkshop.com/workshop/api/mechanic/receive_report",
                 "mechanic_code" : "TRAC_JHN",
                 "number_of_repeats" : 1,
                 "repeat_request_if_failed" : false,
@@ -2457,7 +2457,7 @@
                   "response_from_mechanic_api" : {
                     "id" : 17,
                     "sent" : true,
-                    "report_link" : "http://localhost:8888/workshop/api/mechanic/mechanic_report?report_id=17"
+                    "report_link" : "https://crapi-demo.nnsworkshop.com/workshop/api/mechanic/mechanic_report?report_id=17"
                   },
                   "status" : 200
                 }
