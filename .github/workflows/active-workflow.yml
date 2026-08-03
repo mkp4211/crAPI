@@ -9,10 +9,34 @@ jobs:
   active-scan:
     runs-on: ubuntu-latest
 
+    env:
+      # 可选：临时允许使用 Node 20，消除 Deprecation 警告
+      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ---- 调试：检查 Secret 是否被正确注入（仅显示长度） ----
+      - name: Debug ACTIVE_REGISTRY_PASSWORD
+        run: |
+          if [ -n "${{ secrets.ACTIVE_REGISTRY_PASSWORD }}" ]; then
+            echo "✅ ACTIVE_REGISTRY_PASSWORD is set (length: ${#{{ secrets.ACTIVE_REGISTRY_PASSWORD }}})"
+          else
+            echo "❌ ACTIVE_REGISTRY_PASSWORD is empty or not set"
+            exit 1
+          fi
+
+      # ---- 提前登录到 Google Artifact Registry，验证凭据 ----
+      - name: Login to Google Artifact Registry
+        uses: docker/login-action@v3
+        with:
+          registry: us-central1-docker.pkg.dev
+          username: _json_key_base64   # 与 active_registry_user 保持一致
+          password: ${{ secrets.ACTIVE_REGISTRY_PASSWORD }}
+        # 如果此步失败，则整个 Job 失败，错误原因清晰可见
+
+      # ---- 运行 Active Scan（无需再单独登录） ----
       - name: Run Active Scan
         uses: nonamesec/active-scan-action@v1
         with:
@@ -27,15 +51,3 @@ jobs:
           active_config_file_path: "akamai/environment.json"
           verbose: "true"
           analyze: "false"
-
-          ACTIVE_REGISTRY_URL: "us-central1-docker.pkg.dev/noname-artifacts/nns-docker"
-          ACTIVE_REGISTRY_USER: "_json_key_base64"
-          ACTIVE_REGISTRY_PASSWORD: ${{ secrets.ACTIVE_REGISTRY_PASSWORD }}
-          ACTIVE_API_URL: "https://alitest.nonamesec.com/active"
-          ACTIVE_API_TOKEN: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlLZXkiOiJlMjM5OWQ0NS02OWQ2LTQ3NWEtOGQ2Yy1hNTFmMjVkMzJlZGMiLCJpZCI6IjkzY2RhZjg2LTFiYzAtNDdkYy1hOTU1LWE5MjJlYzMwNWQ3OCIsImlhdCI6MTc4NTc0MzEyOCwiZXhwIjoxODAxMjk1MTI4LCJhdWQiOlsibm9uYW1lLW1hbmFnZW1lbnQtYXBpIl0sImlzcyI6Im5vYXV0aCJ9.iFTLzVDBuvhveJdVhjr4RFRvRQlafp8TSctDvjVhuJwHh4Ub0WlXdjGr_mXHnYB4GymqSsFNQw1iHLhA94o9u5r9YEM3MaRwsRkmrA0-y--pxY1e2EdewThPLf6AUw2gRTFreSX9drm5ATx9WGtk52y6cxO6-sm-0f47xKuTBNPDcHd09uyGMUeDI8Po0fkpSoGcH-9MQ9wtkUwBIzWaj6hWmwVTpPPebf_osQtMjWQl_6csTqI8TTD9TjhnA5-yWDn69tVb8FOxdt9XSWBdpR3K0kGXzGORQNW6Im4eQD8YCb3Tx46sbYgqZh4uAlbrAkJidJsulB2CRP6oNu4icA"
-          ACTIVE_BACKEND_URI: "https://alitest.nonamesec.com/active/backend"
-          TEST_GROUP_ID: "892b51de-67cf-4328-beea-3ade61bcdeb2"
-          ENVIRONMENT_NAME: "${{ github.ref_name }}"
-          ACTIVE_CONFIG_FILE_PATH: "akamai/environment.json"
-          VERBOSE: "true"
-          ANALYZE: "false"
