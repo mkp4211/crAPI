@@ -1,0 +1,38 @@
+{
+  "version": "1.1.0",
+  "applicationId": "fe546701-2232-4710-8980-1475717dc95b",
+  "host": "https://crapi-demo.nnsworkshop.com",
+  "sources": [
+    {
+      "name": "github-crAPI22",
+      "openApi": {
+        "sourceUrl": "https://raw.githubusercontent.com/mkp4211/crAPI/refs/heads/develop/openapi-spec/crapi-openapi-spec.json"
+      },
+      "auth_mappings": []
+    }
+  ],
+  "auths": [
+    {
+      "name": "Jane Doe22",
+      "role": "Reader / Writer",
+      "mappings": [
+        {
+          "type": "header",
+          "value": "Bearer{{Jane Doe}}",
+          "key": "Authorization"
+        }
+      ]
+    },
+    {
+      "name": "John Smith22",
+      "role": "Reader / Writer",
+      "mappings": [
+        {
+          "type": "header",
+          "value": "Bearer{{John Smith}}",
+          "key": "Authorization"
+        }
+      ]
+    }
+  ]
+}
