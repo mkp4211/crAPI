@@ -27,7 +27,7 @@ jobs:
       - name: Run scan
         run: |
           docker run --rm \
-              -v "$ACTIVE_REGISTRY_PASSWORD:/workspace"
+              -v "$ACTIVE_REGISTRY_PASSWORD:/workspace" \
               -e ACTIVE_API_URL=https://demo1.nonamesec.com/active \
               -e ACTIVE_BACKEND_URI=https://demo1.nonamesec.com/active/backend \
               $ACTIVE_REGISTRY_URL/active-cli:$VERSION scan \
