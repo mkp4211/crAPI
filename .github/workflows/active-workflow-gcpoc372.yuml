@@ -1,0 +1,52 @@
+name: Active Scan
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  active-scan:
+    runs-on: ubuntu-latest
+    env:
+      ENV_ID: "91505b25-d7f5-4531-b371-8886fb2c4e4f"
+      ACTIVE_REGISTRY_URL: "us-central1-docker.pkg.dev/noname-artifacts/nns-docker"
+      ACTIVE_REGISTRY_USER: "_json_key_base64"
+      ACTIVE_REGISTRY_PASSWORD: "ewogICJ0eXBlIjogInNlcnZpY2VfYWNjb3VudCIsCiAgInByb2plY3RfaWQiOiAibm9uYW1lLWFydGlmYWN0cyIsCiAgInByaXZhdGVfa2V5X2lkIjogIjYzNzNjYTk4YzIzNzU5N2RkODE4NWVkMjA3YjVjNTBmNzlkZWU5MGMiLAogICJwcml2YXRlX2tleSI6ICItLS0tLUJFR0lOIFBSSVZBVEUgS0VZLS0tLS1cbk1JSUV2UUlCQURBTkJna3Foa2lHOXcwQkFRRUZBQVNDQktjd2dnU2pBZ0VBQW9JQkFRRFVjM3JIallOdTB1ZmhcblNzblNhSmxwWkZpYWRqRzJxTWx4aDJjaks0eWpDTzFvRy9FQUMwZXVweGFwL2JsV0J2WVRoUm5VNFRyZUpocFdcbnhRWHBJMFU4NktVdk9NeE1QejE1S1hEbW9sVmlTd3Y0ZWsyaEdoZkN5TWZFNGxoOCtGRlFya2k2NkdGRFdlejNcblpocFVsdTcwNUtQbnBFWTNpVXVqYnFINlQ1aXhDWGw3eDJmc0JmZjlEQll6TVlYV3UwYmQ2cHF5c3kwRDJBbTBcbmMrdUdrZ24vUmZIUnVmTkZrN001SzBhOUVpZ3dhWVNkQkYwWGhHenJCamQxUHcrOHZaYWRnenpzYUVYTXZlNGtcbnd6ajBRaWN3Tm9ORmdSa1RhMVM2a01KRlV4eHdYUURNdmFEdmIwdmlQcm4yODUrdlJaTG1qVXAyajBydnp6WXpcbkgyZFhoZHlmQWdNQkFBRUNnZ0VBQ29VZXpLcHRMS0I3cU5RMktjZDJuVWN2YWdGK3ViUkc4VmhLbXhJRW9aRStcbkdmeExFdno4QVErazZkK1IvUlFMbUY2UTFCcjdWWjZlWldteExITW5UWjdpcldGdnNxZTJ1dXF4V0FKUkhldU1cbi9ZMm5IN1cvSVZGdTVkSC93MDJUcXZCT1pQT0krN2U3VG83ZnNIcDZSb3FSMkF2eVV3WWQ2eFJaVEVSdzQ2dlNcbmZmQ1N5N05wa1BlSjZSS1RLeGtkN0Y0dmx4VGo2VUdaMkdEQ1JqRmhMQU5peXdDVlRTSmNHOVZIRy9KRk9DQUdcbm4yMjdKOEtyTC9ENDhuQXhHUXZTWU55WjU4cmZweUltOG9RdnVRWFIwQUpLM0RhQXNVbEFqN3hsTUdIWHZ2aWNcbmsrbDZCQW83MlF2YlkyRVJqV2VYTFFBdFI1RFpzanlEK3VaMks4UUdsUUtCZ1FENm8vbEh1RTY4VTRFVTJocjBcbkY0UjVXclBETVZwNnRNU2RXS0VVekV4aVRGUWRUTzI4RlREWTFaQldrQTROOVo4aTBmZW0wbTc5WGwyc3QrK0NcbmxqREpjcnRPUDEzZ2p4WXZtUXhoeXo1YmVELzEvbW1YU1puUThKbElzbzNxdlFpY2JtbC9QRmtjUUtSZnIvZk1cbkJhd3RtRk4zMTJDb1BteDdRWlFYZW9wb3l3S0JnUURZL25Rd2EyUjJFY3gwdkw1OTN2NWdJTDFmZGNUTnkyWDJcbmxDM1NNZzJWZDlERHFFaUxEaUdzc1k3L1N2cThZQ1B1WWJ6b083QU9JODBycFFJOE5sbXZHOHRjRTJsdHNxcy9cbmsrUU9odUtXTlZsSmlZcUJ2amNobHIxYjg5ZUdYdGZtdzUvY2xzbGNURGkxZnNnWU82Q1ltNUZWMHFmcGsydXhcbjROdmdZc2RrL1FLQmdHeCtxSHlzUXFEeEFMSlhDMDNZRkVjM3hSTGNmVThhaXZXVmxQemN4ci9TVEtMMlZ2NlFcbnFibGpFUHozbEsza1FnT2ZvalU3YUVJVEpEZU0wNGZTbmNIR0FXQ0l1NGxtUnZOSnEvdDFNRVFHRktIV2hEeXhcbjVueDBlZFhuUE5sOUJJbzZuVDR2a0Y5VGVCUFhwMHRRdFV4ellNWkNuQnVZRWZ0MDByY3JHMWpyQW9HQWJTeVFcbnJxL0ppckhueVRBUk0ya1hXS3dBTzJBWVZXWXBkY2NWeXJTT0t3NXVSWktNZFJIMkZWbjhWU3VYUFdHdGtra3dcbmJ6TmduNnlabElUZnZBV29WN2JIT1JzM0p3OEdvK1UzajZ1RG93bFNVL0pVY25TT2JtTFdBTWFOUURqRnJYL3RcbkZXSDBDM0Q1OHk3SFk1SFVlaE9ES3NmaTNWemppVXBWdGU1YzNjMENnWUVBald4eGUxbFRUNitiZjNFWnlxWUdcbnQ4ODFHK0wxVitzUjZqTVdQcDhaSEMrdU9OOU45ZzI0Q3hQaXovb3ZubGIxUlF6RUVpSUdnYkc5MnE1akdTL3NcbkRmTGpkNER0bTlYQUlJRGJEaW5mRWgxQXR5NHBNelhzejh6Q2dsQ0sxcTNES0p5ZnpCQmJmYndYQnhOL2RvVGdcbkljMmw2UzB6OHRRemVqcGFRcUhQVkVNPVxuLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLVxuIiwKICAiY2xpZW50X2VtYWlsIjogImdjcG9jLXNhYXNAbm9uYW1lLWFydGlmYWN0cy5pYW0uZ3NlcnZpY2VhY2NvdW50LmNvbSIsCiAgImNsaWVudF9pZCI6ICIxMDI2ODYzMzgzODgwODI4NTU5ODQiLAogICJhdXRoX3VyaSI6ICJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20vby9vYXV0aDIvYXV0aCIsCiAgInRva2VuX3VyaSI6ICJodHRwczovL29hdXRoMi5nb29nbGVhcGlzLmNvbS90b2tlbiIsCiAgImF1dGhfcHJvdmlkZXJfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9vYXV0aDIvdjEvY2VydHMiLAogICJjbGllbnRfeDUwOV9jZXJ0X3VybCI6ICJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9yb2JvdC92MS9tZXRhZGF0YS94NTA5L2djcG9jLXNhYXMlNDBub25hbWUtYXJ0aWZhY3RzLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwKICAidW5pdmVyc2VfZG9tYWluIjogImdvb2dsZWFwaXMuY29tIgp9Cg=="
+      ACTIVE_API_URL: "https://gcpoc.nonamesec.com/active"
+      CORE_CLI_CLIENT_ID: "200b0f836b9b722688a91c0b87ad1c1ae1fd0bf4441a1f994b64880783919bc3"
+      CORE_CLI_CLIENT_SECRET: "1415fed6a2a2833bdeeb509be37abe13d321795ecfeecc42dbe13a04158465e7b4be9091302bc1545d942882e3ace4f1e49be61fcbc569c5038f29fdb5df4712"
+      ACTIVE_BACKEND_URI: "https://gcpoc.nonamesec.com/active/backend"
+      TEST_GROUP_ID: "892b51de-67cf-4328-beea-3ade61bcdeb2"
+      BRANCH_NAME: "${{ github.ref_name }}"
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Login to Active Image Repository
+        shell: bash
+        run: |
+          printf '%s' "$ACTIVE_REGISTRY_PASSWORD" | docker login -u "$ACTIVE_REGISTRY_USER" --password-stdin "$ACTIVE_REGISTRY_URL"
+
+      - name: Run Active Scan
+        shell: bash
+        run: |
+          docker run \
+            --network=host \
+            -e ACTIVE_BACKEND_URI="$ACTIVE_BACKEND_URI" \
+            -e CORE_CLI_CLIENT_ID="$CORE_CLI_CLIENT_ID" \
+            -e CORE_CLI_CLIENT_SECRET="$CORE_CLI_CLIENT_SECRET" \
+            -v "$(pwd)/akamai:/akamai" \
+            "$ACTIVE_REGISTRY_URL/active-cli:$(curl -k "$ACTIVE_API_URL/backend/version")" \
+            scan \
+            --api-url="$ACTIVE_API_URL" \
+            --env-id="$ENV_ID" \
+            --test-group-id="$TEST_GROUP_ID" \
+            --app-version="$BRANCH_NAME" \
+            --verbose
