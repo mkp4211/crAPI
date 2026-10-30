@@ -1,4 +1,4 @@
-name: Active Scan
+name: gcpoc372 - Active Scan
 
 on:
   workflow_dispatch:
